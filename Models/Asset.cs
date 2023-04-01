@@ -11,10 +11,11 @@ namespace cryptocurrency_viewer.Models
         public string id { get; set; }
         public int rank { get; set; }
         public string name { get; set; }
-        public double? marketCapUsd { get; set; }
-        public double? vwap24Hr { get; set; }
-        public double? supply { get; set; }
-        public double? volumeUsd24Hr { get; set; }
-        public double? changePercent24Hr { get; set; }
+        public decimal? marketCapUsd { get; set; }
+        public decimal? vwap24Hr { get; set; }
+        public decimal priceUsd { get; set; }
+        public decimal? supply { get; set; }
+        public decimal? volumeUsd24Hr { get; set; }
+        public decimal? changePercent24Hr { get; set; }
     }
 }

@@ -5,6 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:cryptocurrency_viewer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <DataGrid x:Name="currencyDG" d:ItemsSource="{d:SampleData ItemCount=5}" IsSynchronizedWithCurrentItem="True"/>
+        Title="MainWindow" Height="800" Width="1400">
+    <Window.Resources>
+        <Style TargetType="DataGridRow">
+            <Setter Property="Height" Value="30"/>
+        </Style>
+        <Style TargetType="DataGridCell">
+            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridCell}">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Width" Value="100"/>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="10">
+<DataGrid x:Name="currencyDG" d:ItemsSource="{d:SampleData ItemCount=5}" 
+          IsSynchronizedWithCurrentItem="True" CanUserAddRows="False" 
+          IsReadOnly="True" CanUserSortColumns="False" AutoGenerateColumns="False"
+          MaxWidth="800" Height="330" VerticalAlignment="Top" CanUserResizeColumns="False">
+    <DataGrid.Columns>
+        <DataGridTextColumn Header="Rank" Binding="{Binding rank}" />
+        <DataGridTextColumn Header="Name" Binding="{Binding name}" />
+        <DataGridTextColumn Header="Price" Binding="{Binding priceUsd, StringFormat={}{0:F2}}" />
+        <DataGridTextColumn Header="Market Cup" Binding="{Binding marketCapUsd, StringFormat={}{0:F2}}" />
+        <DataGridTextColumn Header="VWAP (24Hr)" Binding="{Binding vwap24Hr, StringFormat={}{0:F2}}" />
+        <DataGridTextColumn Header="Supply" Binding="{Binding supply, StringFormat={}{0:F2}}" />
+        <DataGridTextColumn Header="Volume (24Hr)" Binding="{Binding volumeUsd24Hr, StringFormat={}{0:F2}}" />
+        <DataGridTextColumn Width="*" Header="Change (24Hr)" Binding="{Binding changePercent24Hr, StringFormat={}{0:F2}}" />
+    </DataGrid.Columns>
+</DataGrid>
+    </Grid>
 </Window>

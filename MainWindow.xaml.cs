@@ -1,4 +1,7 @@
-﻿using cryptocurrency_viewer.Models;
+﻿using cryptocurrency_viewer.Controllers;
+using cryptocurrency_viewer.Models;
+using cryptocurrency_viewer.Services.CryptoData;
+using cryptocurrency_viewer.Views;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -30,88 +33,34 @@ namespace cryptocurrency_viewer
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, ICryptoView
     {
-        List<Asset>? lastAssets;
-        private readonly Timer timer;
+        private readonly CryptoController _cryptoController;
+
+        private List<Asset>? _lastAssets;
+
         public MainWindow()
         {
             InitializeComponent();
-            
-            //data on api refreshes ~ every 20 seconds.
-            timer = new Timer(
-                UpdateTableAsync, 
-                null, 
-                TimeSpan.Zero, 
-                TimeSpan.FromSeconds(20)
-            );
+
+            _cryptoController = new CryptoController(this, new CryptoDataService());
         }
 
-        private async void UpdateTableAsync(object? state)
+        public async Task UpdateTableDataAsync(List<Asset> newAssets)
         {
-            List<Asset>? newAssets = await GetCryptoDataAsync();
-            if (newAssets == null)
-            {
-                return;
-            }
-
-            //updating table
             Dispatcher.Invoke(() =>
             {
-                currencyDG.ItemsSource = newAssets;
+                currencyDataGrid.ItemsSource = newAssets;
             });
 
-            if (lastAssets != null)
+            if (_lastAssets != null)
             {
-                foreach (var newAsset in newAssets)
-                {
-                    Asset? oldAsset = 
-                        lastAssets.FirstOrDefault(x => x.id == newAsset.id);
-                    //check if price has changed
-                    if (oldAsset != null && oldAsset.priceUsd != newAsset.priceUsd)
-                    {
-                        //if it has doing blink animation after render
-                        await Dispatcher.InvokeAsync(() =>
-                        {
-                            var row = currencyDG.ItemContainerGenerator
-                                .ContainerFromItem(newAsset) as DataGridRow;
-                            if (row != null)
-                            {
-                                Color color = newAsset.priceUsd > oldAsset.priceUsd
-                                    ? Colors.LightGreen
-                                    : Colors.Red; 
-                                MakeRowBlink(row, color);
-                            }
-                        }, DispatcherPriority.Render);
-                    }
-                }
+                await BlinkChangedRowsAsync(newAssets);
             }
-            lastAssets = newAssets;
+            _lastAssets = newAssets;
         }
 
-        private async Task<List<Asset>?> GetCryptoDataAsync()
-        {
-            var client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue(
-                    "Bearer", 
-                    "d0748243-b475-4ac1-9fda-7ebaeb98787f"
-                );
-            var uri = new Uri("http://api.coincap.io/v2/assets?limit=10");
-
-            var request = new HttpRequestMessage(HttpMethod.Get, uri);
-            HttpResponseMessage response = await client.SendAsync(request);
-            if (!response.IsSuccessStatusCode)
-            {
-                return null;
-            }
-
-            string jsonString = await response.Content.ReadAsStringAsync();
-            var jObject = JObject.Parse(jsonString);
-            return jObject.GetValue("data")!.ToObject<List<Asset>>()!;
-        }
-
-        private void MakeRowBlink(DataGridRow row, Color color)
+        public void BlinkTableRow(DataGridRow row, Color color)
         {
             var animation = new ColorAnimation
             {
@@ -124,6 +73,33 @@ namespace cryptocurrency_viewer
             var brush = new SolidColorBrush(Colors.White);
             brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
             row.Background = brush;
+        }
+
+        public async Task BlinkChangedRowsAsync(List<Asset> newAssets)
+        {
+            foreach (var newAsset in newAssets)
+            {
+                Asset? oldAsset =
+                    _lastAssets!.FirstOrDefault(x => x.id == newAsset.id);
+
+                //check if price has changed
+                if (oldAsset != null && oldAsset.priceUsd != newAsset.priceUsd)
+                {
+                    //if it has doing blink animation after render
+                    var row = currencyDataGrid.ItemContainerGenerator
+                        .ContainerFromItem(newAsset) as DataGridRow;
+                    await Dispatcher.InvokeAsync(() =>
+                    {
+                        if (row != null)
+                        {
+                            Color color = newAsset.priceUsd > oldAsset.priceUsd
+                                ? Colors.LightGreen
+                                : Colors.Red;
+                            BlinkTableRow(row, color);
+                        }
+                    }, DispatcherPriority.Render);
+                }
+            }
         }
     }
 }

@@ -1,5 +1,4 @@
 D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\cryptocurrency-viewer.csproj.AssemblyReference.cache
-D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\MainWindow.g.cs
 D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\App.g.cs
 D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\cryptocurrency-viewer_MarkupCompile.cache
 D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\cryptocurrency-viewer_MarkupCompile.lref
@@ -8,7 +7,6 @@ D:\projects\dotNet\cryptocurrency-viewer\bin\Debug\net7.0-windows\cryptocurrency
 D:\projects\dotNet\cryptocurrency-viewer\bin\Debug\net7.0-windows\cryptocurrency-viewer.runtimeconfig.json
 D:\projects\dotNet\cryptocurrency-viewer\bin\Debug\net7.0-windows\cryptocurrency-viewer.dll
 D:\projects\dotNet\cryptocurrency-viewer\bin\Debug\net7.0-windows\cryptocurrency-viewer.pdb
-D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\MainWindow.baml
 D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\cryptocurrency-viewer.g.resources
 D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\cryptocurrency-viewer.GeneratedMSBuildEditorConfig.editorconfig
 D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\cryptocurrency-viewer.AssemblyInfoInputs.cache
@@ -21,3 +19,5 @@ D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\cryptocurrency
 D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\ref\cryptocurrency-viewer.dll
 D:\projects\dotNet\cryptocurrency-viewer\bin\Debug\net7.0-windows\Newtonsoft.Json.dll
 D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\cryptocurrency-viewer.csproj.CopyComplete
+D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\MainWindow.g.cs
+D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\MainWindow.baml

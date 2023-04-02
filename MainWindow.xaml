@@ -25,7 +25,7 @@
         </Style>
     </Window.Resources>
     <Grid Margin="10">
-<DataGrid x:Name="currencyDG" d:ItemsSource="{d:SampleData ItemCount=5}" 
+<DataGrid x:Name="currencyDataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" 
           IsSynchronizedWithCurrentItem="True" CanUserAddRows="False" 
           IsReadOnly="True" CanUserSortColumns="False" AutoGenerateColumns="False"
           MaxWidth="800" Height="330" VerticalAlignment="Top" CanUserResizeColumns="False">

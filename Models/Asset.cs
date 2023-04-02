@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace cryptocurrency_viewer.Models
 {
-    internal class Asset
+    public class Asset
     {
         public string id { get; set; }
         public int rank { get; set; }

@@ -11,8 +11,6 @@ namespace cryptocurrency_viewer.Views
 {
     interface ICryptoView
     {
-        Task UpdateTableDataAsync(List<Asset> newAssets);
-        Task BlinkChangedRowsAsync(List<Asset> newAssets);
-        void BlinkTableRow(DataGridRow row, Color color);
+        void BlinkTableRowAsync(DataGridRow row, Color color);
     }
 }

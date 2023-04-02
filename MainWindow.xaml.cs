@@ -1,4 +1,5 @@
 ﻿using cryptocurrency_viewer.Controllers;
+using cryptocurrency_viewer.EventArguments;
 using cryptocurrency_viewer.Models;
 using cryptocurrency_viewer.Services.CryptoData;
 using cryptocurrency_viewer.Views;
@@ -35,33 +36,22 @@ namespace cryptocurrency_viewer
     /// </summary>
     public partial class MainWindow : Window, ICryptoView
     {
-        private readonly CryptoController _cryptoController;
-
-        private List<Asset>? _lastAssets;
+        private readonly CryptoViewModel _viewModel;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            _cryptoController = new CryptoController(this, new CryptoDataService());
+            _viewModel = new CryptoViewModel(new CryptoDataService());
+            _viewModel.AssetPriceChanged += AssetPriceChangedAsync;
+            DataContext = _viewModel;
         }
 
-        public async Task UpdateTableDataAsync(List<Asset> newAssets)
+        public async void BlinkTableRowAsync(DataGridRow row, Color color)
         {
-            Dispatcher.Invoke(() =>
-            {
-                currencyDataGrid.ItemsSource = newAssets;
-            });
+            var brush = new SolidColorBrush(Colors.White);
+            row.Background = brush;
 
-            if (_lastAssets != null)
-            {
-                await BlinkChangedRowsAsync(newAssets);
-            }
-            _lastAssets = newAssets;
-        }
-
-        public void BlinkTableRow(DataGridRow row, Color color)
-        {
             var animation = new ColorAnimation
             {
                 From = Colors.White,
@@ -70,36 +60,38 @@ namespace cryptocurrency_viewer
                 AutoReverse = true,
                 RepeatBehavior = new RepeatBehavior(1)
             };
-            var brush = new SolidColorBrush(Colors.White);
+
             brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
-            row.Background = brush;
+            await Task.Delay(animation.Duration.TimeSpan);
+            row.Background = Brushes.Transparent;
         }
 
-        public async Task BlinkChangedRowsAsync(List<Asset> newAssets)
+        private async void AssetPriceChangedAsync(object sender, ChangedAsset e)
         {
-            foreach (var newAsset in newAssets)
-            {
-                Asset? oldAsset =
-                    _lastAssets!.FirstOrDefault(x => x.id == newAsset.id);
+            var item = currencyDataGrid.ItemContainerGenerator.Items.First(i => e.Id == (i as Asset).id);
+            var row = currencyDataGrid.ItemContainerGenerator
+                .ContainerFromItem(item) as DataGridRow;
 
-                //check if price has changed
-                if (oldAsset != null && oldAsset.priceUsd != newAsset.priceUsd)
+            await Dispatcher.InvokeAsync(new Action(() =>
+            {
+                if (row != null)
                 {
-                    //if it has doing blink animation after render
-                    var row = currencyDataGrid.ItemContainerGenerator
-                        .ContainerFromItem(newAsset) as DataGridRow;
-                    await Dispatcher.InvokeAsync(() =>
-                    {
-                        if (row != null)
-                        {
-                            Color color = newAsset.priceUsd > oldAsset.priceUsd
-                                ? Colors.LightGreen
-                                : Colors.Red;
-                            BlinkTableRow(row, color);
-                        }
-                    }, DispatcherPriority.Render);
+                    Color color = e.IsPriceHigher
+                        ? Colors.LightGreen
+                        : Colors.Red;
+                    BlinkTableRowAsync(row, color);
                 }
-            }
+            }), DispatcherPriority.Render);
+        }
+
+        private void currencyDataGrid_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+
+            Asset selectedAsset = (Asset)currencyDataGrid.SelectedItem;
+
+            CryptoDetailUserControl detailUserControl = new CryptoDetailUserControl(selectedAsset);
+
+            this.Content = detailUserControl;
         }
     }
 }

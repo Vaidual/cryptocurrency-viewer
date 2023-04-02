@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:cryptocurrency_viewer"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1400">
     <Window.Resources>
@@ -23,12 +22,13 @@
             </Setter>
             <Setter Property="Width" Value="100"/>
         </Style>
+
     </Window.Resources>
     <Grid Margin="10">
-<DataGrid x:Name="currencyDataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" 
+        <DataGrid x:Name="currencyDataGrid" ItemsSource="{Binding Assets}" d:ItemsSource="{d:SampleData ItemCount=5}" 
           IsSynchronizedWithCurrentItem="True" CanUserAddRows="False" 
           IsReadOnly="True" CanUserSortColumns="False" AutoGenerateColumns="False"
-          MaxWidth="800" Height="330" VerticalAlignment="Top" CanUserResizeColumns="False">
+          MaxWidth="800" Height="330" VerticalAlignment="Top" CanUserResizeColumns="False" PreviewMouseLeftButtonUp="currencyDataGrid_PreviewMouseLeftButtonUp">
     <DataGrid.Columns>
         <DataGridTextColumn Header="Rank" Binding="{Binding rank}" />
         <DataGridTextColumn Header="Name" Binding="{Binding name}" />

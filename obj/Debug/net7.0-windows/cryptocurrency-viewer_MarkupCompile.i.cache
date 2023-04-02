@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET7_0;NETCOREAPP
 D:\projects\dotNet\cryptocurrency-viewer\App.xaml
-11407045341
+21863153193
 
-10-675455840
+121403992011
 199-888669831
-MainWindow.xaml;
+MainWindow.xaml;Views\CryptoDetailUserControl.xaml;
 
 False
 

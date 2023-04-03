@@ -22,5 +22,7 @@ D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\MainWindow.g.c
 D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\MainWindow.baml
 D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\GeneratedInternalTypeHelper.g.cs
 D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\cryptocurrency-viewer_MarkupCompile.lref
-D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\Views\CryptoDetailUserControl.g.cs
-D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\Views\CryptoDetailUserControl.baml
+D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\Views\CryptoDetail\CryptoDetailPage.g.cs
+D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\Views\CryptoTable\CryptoTablePage.g.cs
+D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\Views\CryptoDetail\CryptoDetailPage.baml
+D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\Views\CryptoTable\CryptoTablePage.baml

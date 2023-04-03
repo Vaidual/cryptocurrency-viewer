@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using cryptocurrency_viewer.Services.CryptoData;
+using System.Configuration;
 
 namespace cryptocurrency_viewer
 {
@@ -19,6 +20,7 @@ namespace cryptocurrency_viewer
         public CryptoDataService()
         {
             _client = new HttpClient();
+
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
                 "Bearer", "d0748243-b475-4ac1-9fda-7ebaeb98787f"
             );

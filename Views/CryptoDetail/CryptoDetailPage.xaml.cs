@@ -1,4 +1,5 @@
 ﻿using cryptocurrency_viewer.Models;
+using cryptocurrency_viewer.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace cryptocurrency_viewer.Views.CryptoDetail
     /// </summary>
     public partial class CryptoDetailPage : Page
     {
-        public CryptoDetailPage(Asset asset)
+        public CryptoDetailPage()
         {
             InitializeComponent();
         }

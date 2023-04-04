@@ -67,12 +67,12 @@ namespace cryptocurrency_viewer.Controllers
             foreach (var newAsset in Assets)
             {
                 Asset? prevAsset =
-                    PreviousAssets.FirstOrDefault(x => x.id == newAsset.id);
+                    PreviousAssets.FirstOrDefault(x => x.Id == newAsset.Id);
 
                 //check if price has changed
-                if (prevAsset != null && prevAsset.priceUsd != newAsset.priceUsd)
+                if (prevAsset != null && prevAsset.PriceUsd != newAsset.PriceUsd)
                 {
-                    var arg = new ChangedAsset(newAsset.id, newAsset.priceUsd > prevAsset.priceUsd);
+                    var arg = new ChangedAsset(newAsset.Id, newAsset.PriceUsd > prevAsset.PriceUsd);
                     AssetPriceChanged.Invoke(this, arg);
                 }
             }

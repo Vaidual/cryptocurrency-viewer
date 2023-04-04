@@ -26,3 +26,5 @@ D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\Views\CryptoDe
 D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\Views\CryptoTable\CryptoTablePage.g.cs
 D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\Views\CryptoDetail\CryptoDetailPage.baml
 D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\Views\CryptoTable\CryptoTablePage.baml
+D:\projects\dotNet\cryptocurrency-viewer\bin\Debug\net7.0-windows\LiveCharts.dll
+D:\projects\dotNet\cryptocurrency-viewer\bin\Debug\net7.0-windows\LiveCharts.Wpf.dll

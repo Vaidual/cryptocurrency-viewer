@@ -1,6 +1,7 @@
 ﻿using cryptocurrency_viewer.Controllers;
 using cryptocurrency_viewer.EventArguments;
 using cryptocurrency_viewer.Models;
+using cryptocurrency_viewer.ViewModels;
 using cryptocurrency_viewer.Views.CryptoDetail;
 using System;
 using System.Collections.Generic;
@@ -26,13 +27,11 @@ namespace cryptocurrency_viewer.Views.CryptoTable
     /// </summary>
     public partial class CryptoTablePage : Page, ICryptoTableView
     {
-        private readonly CryptoViewModel _viewModel;
-
         public CryptoTablePage()
         {
             InitializeComponent();
 
-            _viewModel = new CryptoViewModel(new CryptoDataService());
+            CryptoViewModel _viewModel = new CryptoViewModel(new CryptoDataService());
             _viewModel.AssetPriceChanged += AssetPriceChangedAsync;
             DataContext = _viewModel;
         }
@@ -56,7 +55,7 @@ namespace cryptocurrency_viewer.Views.CryptoTable
 
         private async void AssetPriceChangedAsync(object sender, ChangedAsset e)
         {
-            var item = currencyDataGrid.ItemContainerGenerator.Items.First(i => e.Id == (i as Asset).id);
+            var item = currencyDataGrid.ItemContainerGenerator.Items.First(i => e.Id == (i as Asset).Id);
             var row = currencyDataGrid.ItemContainerGenerator
                 .ContainerFromItem(item) as DataGridRow;
 
@@ -76,11 +75,12 @@ namespace cryptocurrency_viewer.Views.CryptoTable
         {
 
             Asset selectedAsset = (Asset)currencyDataGrid.SelectedItem;
+            var cryptoDetailViewModel = new CryptoDetailViewModel(selectedAsset);
 
-            CryptoDetailPage detailPage = new CryptoDetailPage(selectedAsset);
+            CryptoDetailPage detailPage = new CryptoDetailPage();
+            detailPage.DataContext = cryptoDetailViewModel;
 
-            NavigationService navigationService = NavigationService.GetNavigationService(this);
-            navigationService.Navigate(detailPage);
+            NavigationService.Navigate(detailPage);
         }
     }
 }

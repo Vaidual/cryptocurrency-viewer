@@ -1,5 +1,7 @@
 ﻿using cryptocurrency_viewer.Models;
 using cryptocurrency_viewer.ViewModels;
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView.SKCharts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +26,10 @@ namespace cryptocurrency_viewer.Views.CryptoDetail
     {
         public CryptoDetailPage()
         {
+            
             InitializeComponent();
+
+
         }
     }
 }

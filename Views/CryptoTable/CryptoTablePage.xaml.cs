@@ -1,8 +1,10 @@
 ﻿using cryptocurrency_viewer.Controllers;
 using cryptocurrency_viewer.EventArguments;
 using cryptocurrency_viewer.Models;
+using cryptocurrency_viewer.Services.CryptoData;
 using cryptocurrency_viewer.ViewModels;
 using cryptocurrency_viewer.Views.CryptoDetail;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,13 +27,14 @@ namespace cryptocurrency_viewer.Views.CryptoTable
     /// <summary>
     /// Interaction logic for CryptoTablePage.xaml
     /// </summary>
-    public partial class CryptoTablePage : Page, ICryptoTableView
+    public partial class CryptoTablePage : Page
     {
         public CryptoTablePage()
         {
             InitializeComponent();
 
-            CryptoViewModel _viewModel = new CryptoViewModel(new CryptoDataService());
+            ICryptoDataService cryptoDataService = (Application.Current as App)!.ServiceProvider.GetService<ICryptoDataService>()!;
+            CryptoTableViewModel _viewModel = new CryptoTableViewModel(cryptoDataService);
             _viewModel.AssetPriceChanged += AssetPriceChangedAsync;
             DataContext = _viewModel;
         }
@@ -75,7 +78,8 @@ namespace cryptocurrency_viewer.Views.CryptoTable
         {
 
             Asset selectedAsset = (Asset)currencyDataGrid.SelectedItem;
-            var cryptoDetailViewModel = new CryptoDetailViewModel(selectedAsset);
+            ICryptoDataService cryptoDataService = (Application.Current as App)!.ServiceProvider.GetService<ICryptoDataService>()!;
+            var cryptoDetailViewModel = new CryptoDetailViewModel(selectedAsset, cryptoDataService);
 
             CryptoDetailPage detailPage = new CryptoDetailPage();
             detailPage.DataContext = cryptoDetailViewModel;

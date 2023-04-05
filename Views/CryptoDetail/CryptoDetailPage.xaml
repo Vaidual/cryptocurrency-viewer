@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:cryptocurrency_viewer.Views.CryptoDetail"
+      xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
       xmlns:converters="clr-namespace:cryptocurrency_viewer.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -17,7 +18,7 @@
             <Setter Property="FontSize" Value="18"/>
         </Style>
     </Page.Resources>
-    <Grid Background="White">
+    <StackPanel Background="White" HorizontalAlignment="Center">
         <StackPanel Orientation="Horizontal" Margin="36">
             <StackPanel Margin="0 0 68 0">
                 <TextBlock FontWeight="Bold" x:Name="currencyNameTextBlock" Margin="0 0 0 12">
@@ -43,5 +44,9 @@
                            Text="{Binding Asset.VolumeUsd24Hr, Converter={StaticResource AbbreviatedNumberConverter}}"/>
             </StackPanel>
         </StackPanel>
-    </Grid>
+        <lvc:CartesianChart x:Name="mainChart" Series="{Binding Series}" 
+                            YAxes="{Binding YAxes}" TooltipFindingStrategy="CompareOnlyXTakeClosest" Height="308" Width="749">
+
+        </lvc:CartesianChart>
+    </StackPanel>
 </Page>

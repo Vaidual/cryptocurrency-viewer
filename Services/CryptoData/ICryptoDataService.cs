@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace cryptocurrency_viewer.Services.CryptoData
 {
-    interface ICryptoDataService
+    public interface ICryptoDataService
     {
-        public Task<List<Asset>> GetAssetsAsync(int limit = 10);
+        public Task<Response<List<Asset>>> GetAssetsAsync(int limit = 10);
+        public Task<Response<List<AssetPriceHistory>>> GetAssetPriceHistoryAsync(string asssetId, string interval, DateTime start, DateTime? end = null);
     }
 }

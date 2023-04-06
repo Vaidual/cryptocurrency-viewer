@@ -7,10 +7,10 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Views\CryptoDetail\CryptoDetailPage.xaml.cs">
+    <Compile Update="Views\CryptoDetailPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\CryptoTable\CryptoTablePage.xaml.cs">
+    <Compile Update="Views\CryptoTablePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -18,10 +18,10 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\CryptoDetail\CryptoDetailPage.xaml">
+    <Page Update="Views\CryptoDetailPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\CryptoTable\CryptoTablePage.xaml">
+    <Page Update="Views\CryptoTablePage.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

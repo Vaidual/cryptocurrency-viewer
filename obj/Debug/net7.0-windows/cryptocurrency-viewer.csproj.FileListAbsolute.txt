@@ -22,10 +22,6 @@ D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\MainWindow.g.c
 D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\MainWindow.baml
 D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\GeneratedInternalTypeHelper.g.cs
 D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\cryptocurrency-viewer_MarkupCompile.lref
-D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\Views\CryptoDetail\CryptoDetailPage.g.cs
-D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\Views\CryptoTable\CryptoTablePage.g.cs
-D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\Views\CryptoDetail\CryptoDetailPage.baml
-D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\Views\CryptoTable\CryptoTablePage.baml
 D:\projects\dotNet\cryptocurrency-viewer\bin\Debug\net7.0-windows\Microsoft.Extensions.DependencyInjection.dll
 D:\projects\dotNet\cryptocurrency-viewer\bin\Debug\net7.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 D:\projects\dotNet\cryptocurrency-viewer\bin\Debug\net7.0-windows\HarfBuzzSharp.dll
@@ -44,3 +40,7 @@ D:\projects\dotNet\cryptocurrency-viewer\bin\Debug\net7.0-windows\runtimes\osx\n
 D:\projects\dotNet\cryptocurrency-viewer\bin\Debug\net7.0-windows\runtimes\win-arm64\native\libSkiaSharp.dll
 D:\projects\dotNet\cryptocurrency-viewer\bin\Debug\net7.0-windows\runtimes\win-x64\native\libSkiaSharp.dll
 D:\projects\dotNet\cryptocurrency-viewer\bin\Debug\net7.0-windows\runtimes\win-x86\native\libSkiaSharp.dll
+D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\Views\CryptoDetailPage.g.cs
+D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\Views\CryptoTablePage.g.cs
+D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\Views\CryptoDetailPage.baml
+D:\projects\dotNet\cryptocurrency-viewer\obj\Debug\net7.0-windows\Views\CryptoTablePage.baml

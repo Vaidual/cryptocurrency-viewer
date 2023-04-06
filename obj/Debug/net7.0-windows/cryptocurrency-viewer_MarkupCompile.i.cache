@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET7_0;NETCOREAPP
 D:\projects\dotNet\cryptocurrency-viewer\App.xaml
-3-1617697715
+3-809789521
 
-251229653872
+29656604314
 2102088502995
-MainWindow.xaml;Views\CryptoDetail\CryptoDetailPage.xaml;Views\CryptoTable\CryptoTablePage.xaml;
+MainWindow.xaml;Views\CryptoDetailPage.xaml;Views\CryptoTablePage.xaml;
 
 True
 

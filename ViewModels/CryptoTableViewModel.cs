@@ -36,7 +36,7 @@ namespace cryptocurrency_viewer.Controllers
         //data on api refreshes ~ every 20 seconds.
         const float refreshRate = 20;
 
-        private readonly Timer _timer;
+        private readonly DispatcherTimer _timer;
 
         public CryptoTableViewModel(ICryptoDataService cryptoDataService)
         {
@@ -45,15 +45,12 @@ namespace cryptocurrency_viewer.Controllers
             _assets = new List<Asset>();
             PreviousAssets = new List<Asset>();
 
-            _timer = new Timer(
-                new TimerCallback(UpdateTableAsync),
-                null,
-                TimeSpan.Zero,
-                TimeSpan.FromSeconds(refreshRate)
-            );
+            _timer = new DispatcherTimer();
+            _timer.Interval = TimeSpan.FromSeconds(refreshRate);
+            _timer.Tick += new EventHandler(UpdateTableAsync);
         }
 
-        private async void UpdateTableAsync(object? state)
+        private async void UpdateTableAsync(object? sender, EventArgs e)
         {
             PreviousAssets = Assets.ToList();
             var response = await _cryptoService.GetAssetsAsync();
@@ -81,6 +78,17 @@ namespace cryptocurrency_viewer.Controllers
                     AssetPriceChanged.Invoke(this, arg);
                 }
             }
+        }
+
+        public void StartTimer()
+        {
+            UpdateTableAsync(this, EventArgs.Empty);
+            _timer.IsEnabled= true;
+        }
+
+        public void StopTimer()
+        {
+            _timer.IsEnabled = false;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

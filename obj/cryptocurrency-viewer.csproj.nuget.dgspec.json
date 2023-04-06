@@ -44,10 +44,6 @@
         "net7.0-windows7.0": {
           "targetAlias": "net7.0-windows",
           "dependencies": {
-            "CommunityToolkit.Mvvm": {
-              "target": "Package",
-              "version": "[8.1.0, )"
-            },
             "LiveChartsCore.SkiaSharpView.WPF": {
               "target": "Package",
               "version": "[2.0.0-beta.701, )"

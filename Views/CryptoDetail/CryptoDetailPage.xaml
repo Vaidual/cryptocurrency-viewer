@@ -9,7 +9,6 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CryptoDetailPage">
-    
     <Page.Resources>
         <converters:ChangeColorConverter x:Key="ChangeColorConverter"/>
         <converters:AbbreviatedNumberConverter x:Key="AbbreviatedNumberConverter"/>
@@ -45,7 +44,7 @@
             </StackPanel>
         </StackPanel>
         <lvc:CartesianChart x:Name="mainChart" Series="{Binding Series}" 
-                            YAxes="{Binding YAxes}" TooltipFindingStrategy="CompareOnlyXTakeClosest" Height="308" Width="749">
+                            YAxes="{Binding YAxes}" XAxes="{Binding XAxes}" TooltipFindingStrategy="CompareOnlyXTakeClosest" Height="308" Width="749">
 
         </lvc:CartesianChart>
     </StackPanel>

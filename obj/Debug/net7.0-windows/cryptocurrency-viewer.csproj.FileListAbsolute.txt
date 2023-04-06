@@ -44,4 +44,3 @@ D:\projects\dotNet\cryptocurrency-viewer\bin\Debug\net7.0-windows\runtimes\osx\n
 D:\projects\dotNet\cryptocurrency-viewer\bin\Debug\net7.0-windows\runtimes\win-arm64\native\libSkiaSharp.dll
 D:\projects\dotNet\cryptocurrency-viewer\bin\Debug\net7.0-windows\runtimes\win-x64\native\libSkiaSharp.dll
 D:\projects\dotNet\cryptocurrency-viewer\bin\Debug\net7.0-windows\runtimes\win-x86\native\libSkiaSharp.dll
-D:\projects\dotNet\cryptocurrency-viewer\bin\Debug\net7.0-windows\CommunityToolkit.Mvvm.dll

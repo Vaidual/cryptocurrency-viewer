@@ -6,14 +6,6 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v7.0": {
-      "CommunityToolkit.Mvvm/8.1.0": {
-        "runtime": {
-          "lib/net6.0/CommunityToolkit.Mvvm.dll": {
-            "assemblyVersion": "8.1.0.0",
-            "fileVersion": "8.1.0.1"
-          }
-        }
-      },
       "HarfBuzzSharp/2.8.2.3": {
         "dependencies": {
           "HarfBuzzSharp.NativeAssets.Win32": "2.8.2.3",
@@ -342,13 +334,6 @@
     }
   },
   "libraries": {
-    "CommunityToolkit.Mvvm/8.1.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-xxOt7lu9a5kB5Fs9RfcxzVlKnhuuPe+w7AXHtmCFtS3oldrsUhEMxHfNulluXSscUUoGxZ0jh55Om12ZP6abHA==",
-      "path": "communitytoolkit.mvvm/8.1.0",
-      "hashPath": "communitytoolkit.mvvm.8.1.0.nupkg.sha512"
-    },
     "HarfBuzzSharp/2.8.2.3": {
       "type": "package",
       "serviceable": true,

@@ -50,8 +50,10 @@ namespace cryptocurrency_viewer.ViewModels
             new Axis
             {
                 Labeler = value => TimeConverter.UnixToDateTime((long)value).ToString("htt"),
-                UnitWidth = 2.5,
-                MinStep = 14,
+                UnitWidth = TimeSpan.FromMinutes(5).Ticks,
+                MinStep = TimeSpan.FromHours(1).Ticks,
+                LabelsRotation = -45,
+                LabelsPaint = new SolidColorPaint(SKColors.Black, 1),
             }
         };
 
@@ -68,6 +70,7 @@ namespace cryptocurrency_viewer.ViewModels
             _cryptoService= cryptoService;
 
             Asset = asset;
+
             _observableValues = new ObservableCollection<AssetPriceHistory>();
             Series = new ObservableCollection<ISeries>
             {

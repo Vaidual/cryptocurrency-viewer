@@ -77,7 +77,11 @@ namespace cryptocurrency_viewer.Views.CryptoTable
         private void currencyDataGrid_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
 
-            Asset selectedAsset = (Asset)currencyDataGrid.SelectedItem;
+            Asset? selectedAsset = currencyDataGrid.SelectedItem as Asset;
+            if (selectedAsset == null)
+            {
+                return;
+            }
             ICryptoDataService cryptoDataService = (Application.Current as App)!.ServiceProvider.GetService<ICryptoDataService>()!;
             var cryptoDetailViewModel = new CryptoDetailViewModel(selectedAsset, cryptoDataService);
 
@@ -85,6 +89,16 @@ namespace cryptocurrency_viewer.Views.CryptoTable
             detailPage.DataContext = cryptoDetailViewModel;
 
             NavigationService.Navigate(detailPage);
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            (DataContext as CryptoTableViewModel)?.StartTimer();
+        }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            (DataContext as CryptoTableViewModel)?.StopTimer();
         }
     }
 }

@@ -46,6 +46,40 @@ namespace cryptocurrency_viewer
             return response;
         }
 
+        public async Task<Response<List<Market>>> GetAssetMarket(string assetId, int limit = 100)
+        {
+            var response = new Response<List<Market>>();
+            var uri = new Uri(apiUrlBase + $"/assets/{assetId}/markets?limit={limit}");
+            try
+            {
+                JToken data = await GetDataFromUri(uri);
+                response.Data = data.ToObject<List<Market>>()!;
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = false;
+                response.ErrorMessage = "Failed to get data from api.";
+            }
+            return response;
+        }
+
+        public async Task<Response<Exchange>> GetExchange(string id)
+        {
+            var response = new Response<Exchange>();
+            var uri = new Uri(apiUrlBase + $"/exchanges/{id}");
+            try
+            {
+                JToken data = await GetDataFromUri(uri);
+                response.Data = data.ToObject<Exchange>()!;
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = false;
+                response.ErrorMessage = "Failed to get data from api.";
+            }
+            return response;
+        }
+
         public async Task<Response<List<AssetPriceHistory>>> GetAssetPriceHistoryAsync(string asssetId, string interval, DateTime start, DateTime? end = null)
         {
             long endUnix, startUnix = TimeConverter.DateTimeToUnix(start);

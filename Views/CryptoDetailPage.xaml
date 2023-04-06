@@ -54,5 +54,52 @@
                             YAxes="{Binding YAxes}" XAxes="{Binding XAxes}" TooltipFindingStrategy="CompareOnlyXTakeClosest" Height="308" Width="749">
 
         </lvc:CartesianChart>
+        <ScrollViewer>
+            <ListView ItemsSource="{Binding Markets}" Height="213">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Exchange" DisplayMemberBinding="{Binding ExchangeId}" />
+                        <GridViewColumn Header="Pair">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0}/{1}">
+                                                <Binding Path="BaseSymbol" />
+                                                <Binding Path="QuoteSymbol" />
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Price" DisplayMemberBinding="{Binding PriceUsd}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <Binding Path="PriceUsd" Converter="{StaticResource DecimalFormatterConverter}"/>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn  Header="Volume (24Hr)" DisplayMemberBinding="{Binding VolumeUsd24Hr, Converter={StaticResource DecimalFormatterConverter}}" />
+                        <GridViewColumn Header="Volume (%)" DisplayMemberBinding="{Binding VolumePercent, StringFormat={}{0:F2}%}" />
+                        <GridViewColumn Header="Link">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding ExchangeUrl}" Foreground="Blue" Cursor="Hand">
+                                        <TextBlock.InputBindings>
+                                            <MouseBinding Gesture="LeftClick" Command="{Binding DataContext.OpenLinkCommand, RelativeSource={RelativeSource AncestorType={x:Type Page}}}" CommandParameter="{Binding ExchangeUrl}" />
+                                        </TextBlock.InputBindings>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </ScrollViewer>
     </StackPanel>
 </Page>

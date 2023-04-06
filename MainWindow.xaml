@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:converters="clr-namespace:cryptocurrency_viewer.Converters"
         mc:Ignorable="d"
-        Title="Cryptocurrency Viewer" Height="600" Width="1000">
+        Title="Cryptocurrency Viewer" Height="700" Width="1000">
     <Window.Resources>
         <converters:AssetNameConverter x:Key="AssetNameConverter"/>
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>

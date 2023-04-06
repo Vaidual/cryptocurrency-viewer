@@ -21,6 +21,9 @@ using Newtonsoft.Json.Linq;
 using System.Windows;
 using LiveChartsCore.Drawing;
 using cryptocurrency_viewer.Services.NavigationService;
+using cryptocurrency_viewer.CustomCommads;
+using System.Diagnostics;
+using System.Security.Policy;
 
 namespace cryptocurrency_viewer.ViewModels
 {
@@ -30,8 +33,19 @@ namespace cryptocurrency_viewer.ViewModels
 
         private Asset _asset;
 
-        private readonly ObservableCollection<AssetPriceHistory> _observableValues;
+        private readonly ObservableCollection<AssetPriceHistory> _series;
         public ObservableCollection<ISeries> Series { get; set; }
+
+        private ObservableCollection<Market> _markets;
+        public ObservableCollection<Market> Markets
+        {
+            get => _markets;
+            set
+            {
+                _markets = value;
+                OnPropertyChanged(nameof(Markets));
+            }
+        }
 
         public Asset Asset
         {
@@ -72,18 +86,38 @@ namespace cryptocurrency_viewer.ViewModels
 
             Asset = parameter as Asset;
             InitiallizeChart();
+            InitiallizeMarkets();
+        }
+
+        private async void InitiallizeMarkets()
+        {
+            var marketsResponse = await _cryptoService.GetAssetMarket(Asset.Id, 10);
+            if (!marketsResponse.IsSuccess)
+            {
+                return;
+            }
+            foreach (var market in marketsResponse.Data)
+            {
+                var exchangeRrsponse = await _cryptoService.GetExchange(market.ExchangeId);
+                if (!marketsResponse.IsSuccess)
+                {
+                    return;
+                }
+                market.ExchangeUrl = exchangeRrsponse.Data?.Url;
+            }
+            Markets = new ObservableCollection<Market>(marketsResponse.Data);
         }
 
         public CryptoDetailVM(INavigationService navigationService, ICryptoDataService cryptoService) : base(navigationService)
         {
             _cryptoService= cryptoService;
 
-            _observableValues = new ObservableCollection<AssetPriceHistory>();
+            _series = new ObservableCollection<AssetPriceHistory>();
             Series = new ObservableCollection<ISeries>
             {
                 new LineSeries<AssetPriceHistory>
                 {
-                    Values = _observableValues,
+                    Values = _series,
                     Fill = new SolidColorPaint(SKColor.FromHsl(149, 100, 88)),
                     GeometrySize = 0,
                     Stroke = new SolidColorPaint(SKColor.FromHsl(148, 71, 61), 2),
@@ -98,6 +132,8 @@ namespace cryptocurrency_viewer.ViewModels
                     }
                 }
             };
+
+            OpenLinkCommand = new RelayCommand<string>(OpenLink);
         }
 
         private async void InitiallizeChart()
@@ -114,7 +150,21 @@ namespace cryptocurrency_viewer.ViewModels
             }
             foreach (var e in response.Data)
             {
-                _observableValues.Add(e);
+                _series.Add(e);
+            }
+        }
+
+        public RelayCommand<string> OpenLinkCommand { get; private set; }
+        private void OpenLink(string url)
+        {
+            if (!string.IsNullOrEmpty(url))
+            {
+                ProcessStartInfo psi = new ProcessStartInfo
+                {
+                    FileName = url,
+                    UseShellExecute = true
+                };
+                Process.Start(psi);
             }
         }
     }

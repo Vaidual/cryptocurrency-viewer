@@ -29,10 +29,10 @@ namespace cryptocurrency_viewer
             );
         }
 
-        public async Task<Response<List<Asset>>> GetAssetsAsync(int limit = 10)
+        public async Task<Response<List<Asset>>> GetAssetsAsync(int limit = 10, string? searchKey = null)
         {
             var response = new Response<List<Asset>>();
-            var uri = new Uri(apiUrlBase + $"/assets?limit={limit}");
+            var uri = new Uri(apiUrlBase + $"/assets?limit={limit}" + $"{(searchKey != null ? $"&search={searchKey}" : "")}");
             try
             {
                 JToken data = await GetDataFromUri(uri);

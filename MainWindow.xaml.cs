@@ -2,8 +2,11 @@
 using cryptocurrency_viewer.EventArguments;
 using cryptocurrency_viewer.Models;
 using cryptocurrency_viewer.Services.CryptoData;
+using cryptocurrency_viewer.ViewModels;
 using cryptocurrency_viewer.Views;
+using cryptocurrency_viewer.Views.CryptoDetail;
 using cryptocurrency_viewer.Views.CryptoTable;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -41,7 +44,17 @@ namespace cryptocurrency_viewer
         {
             InitializeComponent();
 
+            ICryptoDataService cryptoDataService = (Application.Current as App)!.ServiceProvider.GetService<ICryptoDataService>()!;
+            var mainViewModel = new MainViewModel(cryptoDataService);
+            this.DataContext = mainViewModel;
+
             MainFrame.NavigationService.Navigate(new CryptoTablePage());
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string text = (sender as TextBox)!.Text;
+            (DataContext as MainViewModel)?.TextChanged(text);
         }
     }
 }

@@ -3,9 +3,61 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converters="clr-namespace:cryptocurrency_viewer.Converters"
         mc:Ignorable="d"
         Title="Cryptocurrency Viewer" Height="800" Width="1400">
+    <Window.Resources>
+        <converters:AssetNameConverter x:Key="AssetNameConverter"/>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
     <Grid Margin="10">
-        <Frame Name="MainFrame" NavigationUIVisibility="Visible"/>
+        <StackPanel HorizontalAlignment="Right">
+            <TextBox Text="{Binding SearchQuery}" Width="130" Height="22" FontSize="14" TextChanged="TextBox_TextChanged"/>
+            <ListBox ItemsSource="{Binding SearchResults}"
+                     Visibility="{Binding IsListBoxVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Width="130">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding Converter="{StaticResource AssetNameConverter}">
+                                    <Binding Path="Name" />
+                                    <Binding Path="Symbol" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Button
+                            Background="Transparent"
+                            Height="20"
+                            BorderThickness="0"
+                            HorizontalContentAlignment="Left"
+                            Command="{Binding RelativeSource={
+                                RelativeSource AncestorType=ListBox},
+                                Path=DataContext.NavigateToAssetDetailsPageCommand}"
+                            
+                            CommandParameter="{Binding RelativeSource={
+                                RelativeSource AncestorType=ListBox},
+                                Path=SelectedValue}">
+                                        <ContentPresenter></ContentPresenter>
+                                    </Button>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                <Setter Property="IsSelected" Value="True"></Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+        </StackPanel>
+        <Frame Name="MainFrame" NavigationUIVisibility="Visible" Margin="0,42,0,0"/>
     </Grid>
 </Window>

@@ -9,7 +9,7 @@ namespace cryptocurrency_viewer.Services.CryptoData
 {
     public interface ICryptoDataService
     {
-        public Task<Response<List<Asset>>> GetAssetsAsync(int limit = 10);
+        public Task<Response<List<Asset>>> GetAssetsAsync(int limit = 10, string? searchKey = null);
         public Task<Response<List<AssetPriceHistory>>> GetAssetPriceHistoryAsync(string asssetId, string interval, DateTime start, DateTime? end = null);
     }
 }
